@@ -9,6 +9,7 @@
 
 include_once '../RKSV/php-rksv-atrust.php';
 include_once 'mysqli.php';
+include_once 'phpqrcode.php';
 
 class Kasse extends \rksvaustria\RKSVATrust
 {
@@ -69,13 +70,14 @@ class Kasse extends \rksvaustria\RKSVATrust
 
   protected function generate_QRcode($code, $data = null)
   {
+    $rnr = $data['rnr'] ?? $this->rnr;
+
     if(is_array($data) && array_key_exists('IID', $data)) $file = "tmp/qrcode_invoice_{$data['IID']}.png";
-    elseif($data['rnr']) $file = "tmp/qrcode_nullreceipt_{$data['rnr']}.png";
+    elseif($rnr) $file = "tmp/qrcode_nullreceipt_$rnr.png";
     else $file = 'tmp/qrcode.png';
 
-    // Generating the QRcode is not implemented in this example up to now
-    #$qr = new QRcode($code);
-    #$qr->save_file($file);
+    // Generate the QR code
+    QRcode::png($code, $file);
     return $file;
   }
 

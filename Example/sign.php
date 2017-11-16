@@ -43,9 +43,9 @@ foreach($invoices as $invoice) {
     $kasse->set_failure(true);    // Signatureinheit ausgefallen
     $kassenfehler = true;         // merken!
   } else {
+    $kasse->set_failure(false);
     if($kassenfehler) $kasse->process_nullreceipt(['receiptdate' => $invoice['invoicedate']]);   // nach Ausfall ein Nullbeleg!
     $kassenfehler = false;
-    $kasse->set_failure(false);
   }
 
   if($invoice['type'] == 'TR') $data['training'] = true;   // Trainingsbeleg
