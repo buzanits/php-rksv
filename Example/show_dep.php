@@ -8,7 +8,11 @@
 
 include_once 'kasse.php';
 
-$kasse = Kasse('u123456789', '123456789', '1');
+$DB = new Mysql_access('localhost', 'myusername', 'mypassword', 'mydb');
+
+$kasse = new Kasse('u123456789', '123456789', '1');
+$kasse->setDB($DB);
+
 
 $dep = $kasse->export_DEP();
 
