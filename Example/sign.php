@@ -8,7 +8,7 @@
 
 include_once 'kasse.php';
 
-$DB = new Mysql_access('localhost', 'phprksv', 'MnJzDBuuo7j7dEXH', 'phprksv');
+$DB = new Mysql_access('localhost', 'myusername', 'mypassword', 'mydb');
 
 $kasse = new Kasse('u123456789', '123456789', '1');
 $kasse->setDB($DB);
