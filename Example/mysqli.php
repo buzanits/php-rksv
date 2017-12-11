@@ -33,7 +33,7 @@ class Mysql_access
     $this->user = $user;
     $this->pass = $pass;
 
-    print "$this->host, $this->user, $this->pass, $this->db\n";
+    #print "$this->host, $this->user, $this->pass, $this->db\n";
 
     if(is_object($host) && is_a($host, 'mysqli')) $this->link = $host;
     else $this->link = new \mysqli($this->host, $this->user, $this->pass, $this->db);
