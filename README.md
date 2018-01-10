@@ -12,3 +12,6 @@ If you want help the project by contributing code that makes the current code be
 This software contains 3rd party open source software:
 
 * PHP QR Code encoder (http://phpqrcode.sourceforge.net), LGPL 3
+
+Requirements:
+* PHP >= 7.0
