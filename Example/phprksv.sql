@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `invoice` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `invoicedate` date NOT NULL,
+  `invoicedate` datetime NOT NULL,
   `number` varchar(255) DEFAULT NULL,
   `type` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,14 +39,14 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`id`, `title`, `invoicedate`, `number`, `type`) VALUES
-(1, 'Barumsatz', '2017-10-02', 'R001', NULL),
-(2, 'Bankomatzahlung', '2017-10-10', 'R002', NULL),
-(3, 'Barumsatz', '2017-10-16', 'R003', NULL),
-(4, 'Kreditkartenzahlung', '2017-11-03', 'R004', NULL),
-(5, 'Trainingsbuchung', '2017-11-04', 'TR001', 'TR'),
-(6, 'Stornorechnung', '2017-11-06', 'STORNO001', 'ST'),
-(7, 'Signatureinheit ausgefallen', '2017-11-09', 'R005', 'ER'),
-(8, 'Signatureinheit geht wieder', '2017-11-13', 'R006', NULL);
+(1, 'Barumsatz', '2017-10-02 12:12:20', 'R001', NULL),
+(2, 'Bankomatzahlung', '2017-10-10 16:23:23', 'R002', NULL),
+(3, 'Barumsatz', '2017-10-16 06:18:23', 'R003', NULL),
+(4, 'Kreditkartenzahlung', '2017-11-03 16:35:34', 'R004', NULL),
+(5, 'Trainingsbuchung', '2017-11-04 18:40:00', 'TR001', 'TR'),
+(6, 'Stornorechnung', '2017-11-06 07:23:20', 'STORNO001', 'ST'),
+(7, 'Signatureinheit ausgefallen', '2017-11-09 05:25:00', 'R005', 'ER'),
+(8, 'Signatureinheit geht wieder', '2017-11-13 10:00:36', 'R006', NULL);
 
 -- --------------------------------------------------------
 
