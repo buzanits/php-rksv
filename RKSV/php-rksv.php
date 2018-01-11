@@ -240,7 +240,7 @@ class RKSVAustria
     else $turnoverCounterstr = $this->encryptAES($turnoverCounter, $rnr);
 
     $chainValue = $this->get_chainValue($rnr - 1);
-    return "{$this->prefix}_{$this->cashBoxID}_{$rnr}_{$invoicedate}_{$amountstr}_{$turnoverCounterstr}_{$this->certSerial}_{$chainValue}";
+    return "{$this->prefix}_{$this->cashBoxID}_{$rnr}_{$receiptdate}_{$amountstr}_{$turnoverCounterstr}_{$this->certSerial}_{$chainValue}";
   }
 
   protected function get_chainValue($rnr)
