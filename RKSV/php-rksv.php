@@ -31,8 +31,8 @@ class RKSVAustria
   public function set_certSerial($value) { $this->certSerial = $value; }
   public function set_prefix($value) { $this->prefix = $value; }
 
-  protected function get_cashBoxID() { return $this->cashBoxID; }
-  protected function get_AESkey() { return $this->AESkey; }
+  protected function get_cashBoxID() { return null; }
+  protected function get_AESkey() { return null; }
   protected function get_sum() { return null; }  // to be overridden
   protected function get_existing_certSerial($rnr) { return null; }  // to be overridden
   protected function get_certSerial_from_signer() { return null; }  // to be overridden
