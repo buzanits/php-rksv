@@ -65,7 +65,7 @@ class Kasse extends \rksvaustria\RKSVATrust
     $rnr = $data['rnr'] ?? $this->rnr;
     $certSerial = $certSerial ?? $data['certSerial'] ?? $this->certSerial ?? $this->get_certSerial($rnr);
     $this->DB->query("insert into rksvreceipt (invoice, rdate, signature, certSerial, rnr) values ($id, '$rdate', '$signature', '$certSerial', '$rnr')");
-    print "insert into rksvreceipt (invoice, rdate, signature, certSerial, rnr) values ($id, '$rdate', '$signature', '$certSerial', '$rnr')";
+    #print "insert into rksvreceipt (invoice, rdate, signature, certSerial, rnr) values ($id, '$rdate', '$signature', '$certSerial', '$rnr')";
   }
 
   protected function generate_QRcode($code, $data = null)
