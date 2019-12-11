@@ -15,7 +15,7 @@ $kasse->setDB($DB);
 
 // Startbeleg mit Datum 1. 10. 2017 anlegen
 if($DB->query_value("select count(*) from rksvreceipt") == 0) {
-  $result = $kasse->create_start_receipt(['receiptdate' => '2017-10-01']);
+  $result = $kasse->create_start_receipt(['receiptdate' => '2017-10-01 10:00:00']);
   if($result !== true) {
     print "ERROR: $result";
     exit;
@@ -36,7 +36,7 @@ foreach($invoices as $invoice) {
 
   // Beim Monatswechsel einen Nullbeleg erstellen
   if($last_month && date('Ym', strtotime($invoice['invoicedate'])) != $last_month) 
-    $kasse->process_nullreceipt(['receiptdate' => date('Y-m-01', strtotime($invoice['invoicedate']))]);
+    $kasse->process_nullreceipt(['receiptdate' => date('Y-m-01', strtotime($invoice['invoicedate'])) . 'T00:00:01']);
   $last_month = date('Ym', strtotime($invoice['invoicedate']));
 
   if($invoice['type'] == 'ER') {

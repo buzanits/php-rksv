@@ -205,6 +205,7 @@ class RKSVAustria
   protected function get_code($data = [])
   {
     $receiptdate = $data['receiptdate'] ?? date('Y-m-d\TH:i:s');
+    if(!strstr($receiptdate, 'T')) $receiptdate = date('Y-m-d\TH:i:s', strtotime($receiptdate));  // convert 2019-12-11 20:15:11 -> 2019-12-11T20:15:11
 
     $amount_normal = $this->formatnum($data['amount_normal']);
     $amount_reduced1 = $this->formatnum($data['amount_reduced1']);
