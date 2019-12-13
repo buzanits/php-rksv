@@ -117,7 +117,7 @@ class RKSVAustria
 
   public function get_AESCheckSum()
   {
-    $hash = substr(hash('sha256', $this->AESkey, true), 0, 3);
+    $hash = substr(hash('sha256', base64_decode($this->AESkey), true), 0, 3);
     return rtrim(base64_encode($hash), '=');
   }
 
@@ -263,7 +263,7 @@ class RKSVAustria
   {
     $bin = pack('J', intval($value * 100)); // pack integer into 64-bit big-endian binary string
     $iv = substr(hash('sha256', $this->get_cashBoxID() . $rnr, true), 0, 16);
-    return openssl_encrypt($bin, 'AES-256-CTR', $this->AESkey, false, $iv);
+    return openssl_encrypt($bin, 'AES-256-CTR', base64_decode($this->AESkey), false, $iv);
   }
 
   // transform base64 encoding to base64url encoding
