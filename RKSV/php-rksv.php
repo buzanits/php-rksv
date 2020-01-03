@@ -259,11 +259,18 @@ class RKSVAustria
     return $result;
   }
 
-  protected function encryptAES($value, $rnr)
+  public function encryptAES($value, $rnr)
   {
     $bin = pack('J', intval($value * 100)); // pack integer into 64-bit big-endian binary string
     $iv = substr(hash('sha256', $this->get_cashBoxID() . $rnr, true), 0, 16);
-    return openssl_encrypt($bin, 'AES-256-CTR', base64_decode($this->AESkey), false, $iv);
+    return openssl_encrypt($bin, 'AES-256-CTR', base64_decode($this->AESkey), 0, $iv);
+  }
+
+  public function decryptAES($ciphertext, $rnr)
+  {
+    $iv = substr(hash('sha256', $this->get_cashBoxID() . $rnr, true), 0, 16);
+    $bin = openssl_decrypt($ciphertext, 'AES-256-CTR', base64_decode($this->AESkey), 0, $iv);
+    return intval(array_shift(unpack('J', $bin))) / 100;
   }
 
   // transform base64 encoding to base64url encoding
