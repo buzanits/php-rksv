@@ -15,3 +15,5 @@ This software contains 3rd party open source software:
 
 Requirements:
 * PHP >= 7.0
+* PHP-curl
+* PHP-gd

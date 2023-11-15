@@ -32,19 +32,19 @@ class REST
     if($data === null) $data = $this->data;
     if($method === null) $method = $this->method;
 
-    $curl = curl_init();
+    $curl = \curl_init();
 
     switch ($method):
     case 'POST':
-      curl_setopt($curl, CURLOPT_POST, 1);
-      if($data) curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+      \curl_setopt($curl, CURLOPT_POST, 1);
+      if($data) \curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     break;
     case 'PUT':
-      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
-      if($data) curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+      \curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
+      if($data) \curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     break;
     case 'DELETE':
-      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
+      \curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
     break;
     default:
       if($data) $url = sprintf('%s?%s', $url, http_build_query($data));
@@ -52,23 +52,23 @@ class REST
 
     // Optional Authentication:
     if($this->username):
-      curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-      curl_setopt($curl, CURLOPT_USERPWD, "$this->username:$this->password");
+      \curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+      \curl_setopt($curl, CURLOPT_USERPWD, "$this->username:$this->password");
     endif;
 
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($curl, CURLOPT_VERBOSE, 1);
+    \curl_setopt($curl, CURLOPT_URL, $url);
+    \curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    \curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    \curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    \curl_setopt($curl, CURLOPT_VERBOSE, 1);
 
-    if($this->headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
+    if($this->headers) \curl_setopt($curl, CURLOPT_HTTPHEADER, $this->headers);
 
-    $result = curl_exec($curl);
-    $statuscode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    $result = \curl_exec($curl);
+    $statuscode = \curl_getinfo($curl, CURLINFO_HTTP_CODE);
     if($statuscode != '200') $this->error = "statuscode $statuscode: $result";
 
-    curl_close($curl);
+    \curl_close($curl);
 
     // Hook after_call
     $this->after_call($result);
