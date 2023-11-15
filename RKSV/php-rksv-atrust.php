@@ -65,9 +65,9 @@ class RKSVATrust extends RKSVAustria
     $result = $rest->get_signature($data);
 
     $error = $rest->get_error();
-    if(strstr($error, 'statuscode 401')) return 'ERROR: Username or password for A-Trust wrong!';
+    if(strstr(print_r($error, true), 'statuscode 401')) return 'ERROR: Username or password for A-Trust wrong!';
 
-    if(strstr($result, 'ERROR')) {
+    if(strstr(print_r($result, true), 'ERROR')) {
       $this->error = $result;
       return false;
     }
@@ -92,7 +92,7 @@ class RKSVATrust extends RKSVAustria
       $result = $rest->get_certificate();
     }
 
-    if(strstr($result, 'ERROR')) {
+    if(strstr(print_r($result, true), 'ERROR')) {
       $this->error = $result;
       return null;
     }
@@ -126,7 +126,7 @@ class RKSVATrust extends RKSVAustria
     $rest = new ATrustREST($this->username, $this->password);
     $result = $rest->get_ZDA();
 
-    if(strstr($result, 'ERROR')) {
+    if(strstr(print_r($result, true), 'ERROR')) {
       $this->error = $result;
       return 'AT1';   // default value
     }

@@ -29,7 +29,7 @@ class Kasse extends \rksvaustria\RKSVATrust
   // get the turnover counter (Umsatzzähler) from all receipts created until now
   protected function get_sum()
   {
-    $sql = "select sum(l.amount*l.pieceprice*(1+l.tax/100)) from invoiceline l, invoice i rksvreceipt r 
+    $sql = "select sum(l.amount*l.pieceprice*(1+l.tax/100)) from invoiceline l, invoice i, rksvreceipt r 
             where l.invoice=i.id and i.id=r.invoice and i.type<>'TR'";    // i.type='TR' means trainings receipt (Trainingsbuchung) in this test example
     return $this->DB->query_value($sql);
   }
@@ -38,7 +38,7 @@ class Kasse extends \rksvaustria\RKSVATrust
   protected function get_data($rnr)
   {
     $invoice = $this->DB->query_list("select i.*, r.rdate from invoice i, rksvreceipt r where r.invoice=i.id and r.rnr='$rnr'");
-    if(sizeof($invoice) == 0) return ['rnr' => $rnr];
+    if($invoice === null || sizeof($invoice) == 0) return ['rnr' => $rnr];
 
     $amounts = $this->DB->query_index_array("select tax, sum(amount*pieceprice*(1+tax/100)) as brutto from invoiceline
                                              where invoice='{$invoice['id']}' group by tax");
